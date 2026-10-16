@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b0c12" />
+<title>Nischay Mishra — Portfolio</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(#f6f6f8, #0b0c12);
+  --surface: light-dark(#ffffff, #12141d);
+  --surface-2: light-dark(#efeff4, #191b27);
+  --text: light-dark(#171821, #f4f4fa);
+  --muted: light-dark(#666978, #a2a5b7);
+  --line: light-dark(#dedfe8, #2b2d3b);
+  --accent: #a9f36b;
+  --accent-2: #b8a5ff;
+  --ink: #11130d;
+  --shadow: 0 24px 70px rgba(0,0,0,.18);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 86px; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; }
+button, a { font: inherit; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; }
+#app { min-height: 100vh; width: 100%; background-color: var(--bg); border-radius: 0; overflow: clip; }
+.wrap { width: min(1120px, calc(100% - 44px)); margin: 0 auto; }
+.nav { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px); background: color-mix(in srgb, var(--bg) 84%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--line) 65%, transparent); }
+.nav-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { font-size: 15px; font-weight: 800; letter-spacing: -.04em; display: flex; align-items: center; gap: 10px; }
+.brand-mark { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 10px; color: var(--ink); background: var(--accent); font-weight: 900; }
+.nav-links { display: flex; gap: 28px; align-items: center; color: var(--muted); font-size: 13px; }
+.nav-links a { transition: color .2s ease; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta, .button { border: 0; border-radius: 999px; padding: 12px 17px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 750; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.nav-cta, .button.primary { color: var(--ink); background: var(--accent); }
+.nav-cta:hover, .button:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(169,243,107,.18); }
+.button.secondary { border: 1px solid var(--line); color: var(--text); background: var(--surface); }
+.hero { padding: 94px 0 74px; position: relative; }
+.hero-grid { display: grid; grid-template-columns: 1.3fr .7fr; gap: 64px; align-items: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 9px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; color: var(--muted); }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 16%, transparent); }
+h1 { font-size: clamp(48px, 7vw, 86px); line-height: .99; letter-spacing: -.075em; margin: 24px 0; font-weight: 820; max-width: 740px; }
+.gradient-text { color: var(--accent-2); }
+.hero-copy { max-width: 590px; color: var(--muted); font-size: 17px; line-height: 1.8; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.hero-meta { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 36px; font-size: 12px; color: var(--muted); }
+.hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+.hero-art { min-height: 360px; position: relative; display: grid; place-items: center; }
+.orbit { position: absolute; border: 1px solid var(--line); border-radius: 50%; width: 310px; height: 310px; animation: spin 28s linear infinite; }
+.orbit:before, .orbit:after { content: ''; position: absolute; width: 11px; height: 11px; border-radius: 50%; background: var(--accent-2); top: 34px; left: 49px; box-shadow: 0 0 26px var(--accent-2); }
+.orbit:after { background: var(--accent); top: auto; left: auto; bottom: 20px; right: 46px; box-shadow: 0 0 24px var(--accent); }
+.orbit.two { width: 240px; height: 240px; border-style: dashed; animation-direction: reverse; animation-duration: 36s; }
+.orbit.two:before { background: #ffb86b; box-shadow: 0 0 24px #ffb86b; top: 8px; left: 130px; }
+.core-card { position: relative; z-index: 1; width: 220px; height: 250px; padding: 22px; border-radius: 24px; background: linear-gradient(145deg, #222438, #11131c 72%); border: 1px solid #34364b; box-shadow: var(--shadow); transform: rotate(-5deg); display: flex; flex-direction: column; justify-content: space-between; color: #f5f5ff; }
+.core-top { display: flex; justify-content: space-between; color: #aaaec4; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+.core-monogram { font-size: 76px; font-weight: 850; line-height: 1; letter-spacing: -.1em; color: var(--accent); }
+.core-bottom { font-size: 11px; color: #c4c6d6; display: flex; justify-content: space-between; align-items: center; }
+.section { padding: 84px 0; }
+.section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 34px; }
+.kicker { color: var(--accent-2); font-size: 11px; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+h2 { font-size: clamp(32px, 4vw, 48px); line-height: 1.08; letter-spacing: -.06em; margin: 10px 0 0; }
+.section-intro { color: var(--muted); max-width: 420px; font-size: 14px; }
+.about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 22px; }
+.about-panel { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 28px; }
+.about-panel.feature { background: var(--accent); color: var(--ink); border-color: transparent; min-height: 250px; display: flex; flex-direction: column; justify-content: space-between; }
+.about-panel.feature p { font-size: 26px; line-height: 1.3; letter-spacing: -.045em; font-weight: 750; margin: 18px 0; }
+.small-label { text-transform: uppercase; letter-spacing: .13em; font-size: 10px; font-weight: 850; opacity: .7; }
+.about-copy { color: var(--muted); font-size: 15px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+.stat { padding: 16px; border-radius: 15px; background: var(--surface-2); }
+.stat strong { display: block; font-size: 24px; letter-spacing: -.05em; }
+.stat span { color: var(--muted); font-size: 11px; }
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.skill-card { padding: 23px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; transition: transform .25s ease, border-color .25s ease; }
+.skill-card:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--accent-2) 70%, var(--line)); }
+.skill-icon { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: var(--surface-2); font-size: 18px; margin-bottom: 20px; }
+.skill-card h3 { margin: 0 0 9px; font-size: 16px; letter-spacing: -.03em; }
+.skill-card p { color: var(--muted); font-size: 13px; margin: 0; line-height: 1.8; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
+.tag { display: inline-flex; align-items: center; padding: 6px 9px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 10px; font-weight: 700; }
+.projects { display: grid; gap: 18px; }
+.project { display: grid; grid-template-columns: .82fr 1.18fr; border-radius: 26px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); transition: transform .25s ease, box-shadow .25s ease; }
+.project:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.project-visual { min-height: 290px; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative; background: #171a27; color: #f6f6ff; }
+.project-visual.green { background: #c5f89c; color: #1b2814; }
+.project-visual.purple { background: #c7b9ff; color: #241d3e; }
+.project-no { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; font-weight: 850; opacity: .72; }
+.visual-title { font-size: 31px; line-height: 1.05; letter-spacing: -.065em; font-weight: 850; max-width: 280px; position: relative; z-index: 2; }
+.visual-foot { display: flex; justify-content: space-between; font-size: 11px; font-weight: 750; opacity: .75; position: relative; z-index: 2; }
+.visual-orb { position: absolute; width: 230px; height: 230px; border: 1px solid currentColor; border-radius: 50%; right: -45px; top: 40px; opacity: .25; }
+.visual-orb:before, .visual-orb:after { content: ''; position: absolute; border: 1px solid currentColor; border-radius: 50%; inset: 28px; }
+.visual-orb:after { inset: 65px; background: currentColor; opacity: .12; }
+.project-body { padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+.project-topline { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 13px; }
+.project-type { color: var(--accent-2); font-size: 10px; letter-spacing: .14em; font-weight: 850; text-transform: uppercase; }
+.project-year { color: var(--muted); font-size: 11px; }
+.project h3 { margin: 0; font-size: 25px; letter-spacing: -.05em; }
+.project-body p { color: var(--muted); font-size: 14px; line-height: 1.8; margin: 12px 0 16px; }
+.project-points { margin: 0; padding-left: 18px; color: var(--muted); font-size: 12px; display: grid; gap: 7px; }
+.project-points li::marker { color: var(--accent-2); }
+.project-stack { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 21px; }
+.timeline { border-left: 1px solid var(--line); margin-left: 8px; padding-left: 28px; display: grid; gap: 25px; }
+.experience-item { position: relative; padding: 0 0 4px; }
+.experience-item:before { content: ''; position: absolute; width: 9px; height: 9px; background: var(--accent); border: 4px solid var(--bg); border-radius: 50%; left: -34px; top: 6px; box-shadow: 0 0 0 1px var(--accent); }
+.exp-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; color: var(--muted); font-size: 11px; }
+.experience-item h3 { font-size: 20px; letter-spacing: -.04em; margin: 7px 0 2px; }
+.exp-company { color: var(--accent-2); font-size: 13px; font-weight: 750; }
+.experience-item ul { color: var(--muted); padding-left: 18px; margin: 12px 0 0; font-size: 13px; display: grid; gap: 7px; }
+.education-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.edu-card { border: 1px solid var(--line); background: var(--surface); border-radius: 20px; padding: 24px; }
+.edu-card .year { color: var(--accent-2); font-size: 11px; font-weight: 850; }
+.edu-card h3 { margin: 8px 0 5px; font-size: 17px; letter-spacing: -.03em; }
+.edu-card p { color: var(--muted); font-size: 13px; margin: 0; }
+.credential-line { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 16px; color: var(--muted); font-size: 12px; line-height: 1.9; }
+.contact-panel { padding: 48px; border-radius: 28px; background: var(--surface-2); border: 1px solid var(--line); display: grid; grid-template-columns: 1.1fr .9fr; gap: 35px; align-items: center; }
+.contact-panel h2 { max-width: 540px; }
+.contact-panel p { color: var(--muted); font-size: 14px; max-width: 470px; }
+.contact-links { display: grid; gap: 10px; }
+.contact-link { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding: 14px 16px; border: 1px solid var(--line); background: var(--surface); border-radius: 13px; font-size: 12px; transition: border-color .2s ease, transform .2s ease; }
+.contact-link:hover { border-color: var(--accent-2); transform: translateX(3px); }
+.contact-link span:first-child { color: var(--muted); }
+.footer { padding: 27px 0 36px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--muted); font-size: 11px; }
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { *, *:before, *:after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
+@media (max-width: 800px) { .hero-grid { grid-template-columns: 1fr; gap: 10px; } .hero { padding-top: 65px; } .hero-art { min-height: 300px; } .orbit { width: 260px; height: 260px; } .orbit.two { width: 200px; height: 200px; } .about-grid, .project, .contact-panel { grid-template-columns: 1fr; } .skills-grid { grid-template-columns: repeat(2, 1fr); } .project-visual { min-height: 220px; } .contact-panel { padding: 30px; } .section-head { align-items: start; flex-direction: column; gap: 8px; } }
+@media (max-width: 540px) { .wrap { width: min(100% - 30px, 1120px); } .nav-inner { min-height: 66px; } .nav-links { gap: 14px; font-size: 11px; } .nav-links a:nth-child(2), .nav-links a:nth-child(3) { display: none; } .nav-cta { padding: 10px 12px; font-size: 11px; } h1 { font-size: 52px; } .hero-copy { font-size: 15px; } .section { padding: 62px 0; } .skills-grid, .education-grid { grid-template-columns: 1fr; } .stats { gap: 7px; } .stat { padding: 12px 10px; } .stat strong { font-size: 20px; } .stat span { font-size: 10px; } .project-body { padding: 23px; } .project h3 { font-size: 22px; } .contact-panel { padding: 24px; } .contact-link { font-size: 11px; } }
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#home" aria-label="Nischay Mishra home"><span class="brand-mark">N</span><span>Nischay Mishra<span style="color:var(--accent-2)">.</span></span></a>
+      <nav class="nav-links" aria-label="Main navigation"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#experience">Experience</a></nav>
+      <a class="nav-cta" href="#contact">Let’s talk <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <div class="eyebrow"><span class="status-dot"></span> CS undergraduate · SDE · Data & AI</div>
+          <h1>Building useful things with <span class="gradient-text">code & data.</span></h1>
+          <p class="hero-copy">I’m Nischay Mishra — a Computer Science undergraduate interested in software engineering, problem-solving, data engineering, and applied AI. I enjoy turning ideas into reliable systems and useful products.</p>
+          <div class="hero-actions"><a class="button primary" href="#projects">Explore my work <span aria-hidden="true">↘</span></a><a class="button secondary" href="mailto:nischaymishra72005@gmail.com">Get in touch <span aria-hidden="true">↗</span></a></div>
+          <div class="hero-meta"><span>⌁ Mumbai, India</span><span>◎ BIT Mesra · 2023–2027</span><span>↗ Open to SDE & data/AI opportunities</span></div>
+        </div>
+        <div class="hero-art reveal" aria-label="Abstract orbital graphic"><div class="orbit"></div><div class="orbit two"></div><div class="core-card"><div class="core-top"><span>Portfolio / 2026</span><span>✳</span></div><div class="core-monogram">NM</div><div class="core-bottom"><span>Curious by design</span><span>01—04</span></div></div></div>
+      </div>
+    </section>
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-head reveal"><div><div class="kicker">01 / A little about me</div><h2>Curiosity meets<br>execution.</h2></div><p class="section-intro">From solving algorithmic problems and building backend APIs to transforming large datasets and shipping AI pipelines, I enjoy turning messy problems into clear, useful systems.</p></div>
+        <div class="about-grid">
+          <div class="about-panel feature reveal"><div class="small-label">My approach</div><p>Write clean code. Build reliable systems. Make the product useful.</p><div class="small-label">Software · Data · AI</div></div>
+          <div class="about-panel reveal"><div class="small-label">The short version</div><p class="about-copy">I’m pursuing a B.Tech in Computer Science at Birla Institute of Technology, Mesra. My experience spans enterprise BI and data engineering at Axis Bank, plus AI/ML pipeline work at Reliance Jio. I like working across the stack—from data transformation and model inference to the interface people actually use.</p>
+            <div class="stats"><div class="stat"><strong>20M+</strong><span>Records validated</span></div><div class="stat"><strong>68%</strong><span>Fewer semantic cubes</span></div><div class="stat"><strong>8.48/10</strong><span>Current GPA</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="skills">
+      <div class="wrap"><div class="section-head reveal"><div><div class="kicker">02 / My toolkit</div><h2>Skills that work<br>together.</h2></div><p class="section-intro">A practical mix of programming, data platforms, analytics, and model-building tools. No toolbox for toolbox’s sake.</p></div>
+        <div class="skills-grid">
+          <article class="skill-card reveal"><div class="skill-icon">⌘</div><h3>Software Development</h3><p>Building maintainable solutions and tackling coding problems.</p><div class="skill-tags"><span class="tag">C++</span><span class="tag">Java</span><span class="tag">Python</span><span class="tag">DSA</span><span class="tag">OOP</span><span class="tag">Git</span></div></article>
+          <article class="skill-card reveal"><div class="skill-icon">▤</div><h3>Data Engineering</h3><p>Moving, transforming, and validating data at scale.</p><div class="skill-tags"><span class="tag">Apache Kafka</span><span class="tag">PySpark</span><span class="tag">ETL</span><span class="tag">Data Validation</span></div></article>
+          <article class="skill-card reveal"><div class="skill-icon">◫</div><h3>Analytics & BI</h3><p>Shaping semantic models into useful business insights.</p><div class="skill-tags"><span class="tag">Power BI</span><span class="tag">Data Visualization</span><span class="tag">Semantic Modeling</span></div></article>
+          <article class="skill-card reveal"><div class="skill-icon">✳</div><h3>Machine Learning</h3><p>Forecasting, prediction, and text classification workflows.</p><div class="skill-tags"><span class="tag">Scikit-learn</span><span class="tag">XGBoost</span><span class="tag">Random Forest</span><span class="tag">Prophet</span></div></article>
+          <article class="skill-card reveal"><div class="skill-icon">⌁</div><h3>NLP & Transformers</h3><p>Using language models to classify and organize information.</p><div class="skill-tags"><span class="tag">TinyBERT</span><span class="tag">Hugging Face</span></div></article>
+          <article class="skill-card reveal"><div class="skill-icon">⌘</div><h3>Backend & Full Stack</h3><p>Designing APIs and connecting application interfaces to backend services.</p><div class="skill-tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">FastAPI</span><span class="tag">REST APIs</span><span class="tag">MySQL</span><span class="tag">PostgreSQL</span></div></article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="projects">
+      <div class="wrap"><div class="section-head reveal"><div><div class="kicker">03 / Selected work</div><h2>Built to solve<br>real problems.</h2></div><p class="section-intro">A couple of projects where data pipelines, predictive models, and product thinking come together.</p></div>
+        <div class="projects">
+          <article class="project reveal"><div class="project-visual green"><div class="project-no">Project 01 · Full stack</div><div class="visual-orb"></div><div class="visual-title">See the value<br>behind the address.</div><div class="visual-foot"><span>ESTATE X</span><span>2026 ↗</span></div></div><div class="project-body"><div class="project-topline"><span class="project-type">AI · Analytics · Web</span><span class="project-year">2026</span></div><h3>AI Real Estate Price Intelligence</h3><p>A full-stack analytics platform for property-price prediction, investment scoring, and area-level trend analysis—bringing model outputs into a practical dashboard.</p><ul class="project-points"><li>Predicts property prices with Random Forest and XGBoost.</li><li>Node.js/Express REST APIs support listings, filtering, pagination, and retrieval.</li><li>FastAPI serves real-time ML inference; a React dashboard presents predictions and location-based heat maps.</li></ul><div class="project-stack"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">FastAPI</span><span class="tag">Random Forest</span><span class="tag">XGBoost</span></div><a class="button secondary project-link" href="https://github.com/NishV72005" target="_blank" rel="noopener noreferrer">View on GitHub <span aria-hidden="true">↗</span></a></div></article>
+          <article class="project reveal"><div class="project-visual purple"><div class="project-no">Project 02 · Real-time systems</div><div class="visual-orb"></div><div class="visual-title">From live streams<br>to useful signals.</div><div class="visual-foot"><span>RENNEX</span><span>2025 ↗</span></div></div><div class="project-body"><div class="project-topline"><span class="project-type">Data engineering · AI/ML</span><span class="project-year">2025</span></div><h3>Rennex: A Real-Time AI Data Pipeline</h3><p>A pipeline combining weather forecasting and news classification, built around streaming ingestion, automated inference, and interactive analysis.</p><ul class="project-points"><li>Integrated external data APIs with Apache Kafka for real-time ingestion.</li><li>Used Prophet for weather forecasting and TinyBERT for news headline classification.</li><li>Connected model outputs to Node.js-powered visualizations for exploring forecasts and categorized news.</li></ul><div class="project-stack"><span class="tag">Apache Kafka</span><span class="tag">Prophet</span><span class="tag">TinyBERT</span><span class="tag">Hugging Face</span><span class="tag">Node.js</span><span class="tag">Data Pipelines</span></div><a class="button secondary project-link" href="https://github.com/NishV72005" target="_blank" rel="noopener noreferrer">View on GitHub <span aria-hidden="true">↗</span></a></div></article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="experience">
+      <div class="wrap"><div class="section-head reveal"><div><div class="kicker">04 / Experience</div><h2>Learning by<br>doing the work.</h2></div><p class="section-intro">Hands-on experience across enterprise data engineering and applied AI/ML.</p></div>
+        <div class="timeline">
+          <article class="experience-item reveal"><div class="exp-meta"><span>May 2026 — July 2026</span><span>Mumbai, India</span></div><h3>Data Engineering Intern (BIU)</h3><div class="exp-company">Axis Bank · Business Intelligence Unit</div><ul><li>Consolidated Power BI semantic models from 25 to 8 semantic cubes, reducing the semantic layer by 68%.</li><li>Built SQL and PySpark transformation pipelines using join optimization, UNION ALL, schema harmonization, and flag-based reconstruction.</li><li>Validated and reconciled 20M+ records using automated SQL checks; prepared unified semantic models for natural-language analytics and AI-agent integration.</li></ul></article>
+          <article class="experience-item reveal"><div class="exp-meta"><span>May 2025 — July 2025</span><span>AI/ML</span></div><h3>AI/ML Intern</h3><div class="exp-company">Reliance Jio</div><ul><li>Built real-time AI data pipelines for streaming, processing, and analyzing network and external data sources.</li><li>Forecasted data-traffic trends across key Jio cities with Prophet to compare patterns by location.</li><li>Developed a TinyBERT news-classification pipeline and integrated external APIs with Apache Kafka for real-time ingestion and automated inference.</li></ul></article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="education">
+      <div class="wrap"><div class="section-head reveal"><div><div class="kicker">05 / Education & extras</div><h2>The foundations.</h2></div></div>
+        <div class="education-grid"><article class="edu-card reveal"><div class="year">2023 — 2027</div><h3>Birla Institute of Technology, Mesra</h3><p>B.Tech in Computer Science · GPA 8.48/10 (ongoing)</p></article><article class="edu-card reveal"><div class="year">2021 — 2023</div><h3>Schooling · Navi Mumbai</h3><p>New Bombay City School — CBSE 12th: 93.4%<br>Apeejay School Nerul — CBSE 10th: 95.6%</p></article></div>
+        <div class="about-panel reveal" style="margin-top:16px"><div class="small-label">Certifications & highlights</div><div class="credential-line"><strong style="color:var(--text)">Certifications:</strong> IBM Introduction to Machine Learning · IBM Data Science Methodology · IBM Python for AI/Data Science/ML · IBM Data Analysis with Python<br><strong style="color:var(--text)">Highlights:</strong> IEEE Cicada — 4th Position · Pantheon 2024 · Army Innerve Hackathon 2025 — Finalist · LeetCode Knight</div></div>
+      </div>
+    </section>
+    <section class="section" id="contact"><div class="wrap"><div class="contact-panel reveal"><div><div class="kicker">06 / Your turn</div><h2>Have a good problem? Let’s build something.</h2><p>Interested in data engineering, analytics, and applied AI opportunities. If you’re working on something interesting, I’d love to hear about it.</p><a class="button primary" href="mailto:nischaymishra72005@gmail.com">Say hello <span aria-hidden="true">↗</span></a></div><div class="contact-links"><a class="contact-link" href="mailto:nischaymishra72005@gmail.com"><span>Email</span><strong>Send a message ↗</strong></a><a class="contact-link" href="https://linkedin.com/in/nischay-mishra-72310b290" target="_blank" rel="noreferrer"><span>LinkedIn</span><strong>Connect ↗</strong></a><a class="contact-link" href="https://github.com/NishV72005" target="_blank" rel="noreferrer"><span>GitHub</span><strong>View projects ↗</strong></a><a class="contact-link" href="https://leetcode.com/u/nischaymishra720051" target="_blank" rel="noreferrer"><span>LeetCode</span><strong>Problem solving ↗</strong></a></div></div><footer class="footer"><span>© 2026 Nischay Mishra</span><span>Designed with curiosity & a little caffeine.</span><a href="#home">Back to top ↑</a></footer></div></section>
+  </main>
+</div>
+<script>
+(function () {
+  const items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    items.forEach((item) => observer.observe(item));
+  } else {
+    items.forEach((item) => item.classList.add('visible'));
+  }
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
